@@ -14,10 +14,11 @@ With **pin2pin**, you can easily upload files, generate unique download links, a
 - 🔗 **Unique Shareable Links**: Generate and share a link for instant file transfer.
 - 📡 **Seamless Transfers**: Transfer files between browsers without a hitch.
 - 💡 **Simple Interface**: No distractions, just pure file-sharing magic.
+- ⚖️ **File Size Limit**: The maximum file size for upload is **25 MB**. 📏
 
 ## ⚡ **Why You’ll Love pin2pin**:
 - **Zero Hassle**: Upload and share your files in a flash! ✨
-- **Super Speed**: Works seamlessly even for large files! 🚀
+- **Super Speed**: Works seamlessly even for large files (up to 25 MB)! 🚀
 - **No Signups Needed**: Just upload and share—no accounts required! 🙌
 
 ## ⚙️ **Installation**:
