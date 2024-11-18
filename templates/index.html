@@ -4,14 +4,141 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #00796b; /* Dark sea green text color */
+            overflow: hidden;
+            background: 
+                linear-gradient(180deg, rgba(0, 77, 64, 0.7), rgba(224, 247, 250, 0.7)), /* Blended gradient with transparency */
+                url('https://i.gifer.com/YmYy.gif') no-repeat center center fixed; /* Sea breeze GIF background */
+            background-size: cover;
+            background-blend-mode: multiply; /* Blends the GIF with the gradient */
+            position: relative;
+            z-index: 0;
+        }
 
+        /* Overlay to slightly dim the background GIF */
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3); /* Dark semi-transparent overlay */
+            z-index: -1; /* Ensure overlay stays behind the content */
+        }
+
+        /* Content containers with solid background to ensure readability */
+        .content {
+            background: rgba(255, 255, 255, 0.9); /* Solid white background with slight opacity */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Sea wave animation effect */
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('https://www.transparenttextures.com/patterns/wavy-lines.png') repeat-x;
+            animation: waveAnimation 5s linear infinite;
+            z-index: -2; /* Ensure waves stay behind content */
+        }
+
+        @keyframes waveAnimation {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        h1 {
+            color: #00796b; /* Dark text on light background */
+            margin-bottom: 20px;
+        }
+
+        #fileInput {
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #004d40;
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        #uploadButton {
+            padding: 10px 20px;
+            background-color: #00796b; /* Sea green button */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #uploadButton:hover {
+            background-color: #004d40; /* Dark sea green on hover */
+        }
+
+        #link {
+            margin-top: 20px;
+            color: #00796b;
+            font-size: 16px;
+            word-wrap: break-word;
+			font-weight: bold;
+        }
+
+        /* Loading spinner styles */
+        #loading {
+            display: none;
+            margin-top: 20px;
+            color: #00796b;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #00796b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload a File</h1>
-    <input type="file" id="fileInput" />
-    <button id="uploadButton">Upload</button>
-    <p id="link"></p>
-	    <script>
+    <div class="waves"></div> <!-- Sea wave background animation -->
+    <div class="content">
+        <h1>Upload a File</h1>
+        <input type="file" id="fileInput" />
+        <button id="uploadButton">Upload</button>
+        <div id="loading" class="spinner"></div>
+        <p id="link"></p>
+    </div>
+
+    <script>
         document.getElementById("uploadButton").onclick = async () => {
             const fileInput = document.getElementById("fileInput");
             const file = fileInput.files[0];
@@ -23,10 +150,16 @@
             const formData = new FormData();
             formData.append("file", file);
 
+            // Show loading animation
+            document.getElementById("loading").style.display = "block";
+
             const response = await fetch("/upload", {
                 method: "POST",
                 body: formData,
             });
+
+            // Hide loading animation
+            document.getElementById("loading").style.display = "none";
 
             if (response.ok) {
                 const data = await response.json();
