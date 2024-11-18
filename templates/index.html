@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <input type="file" id="fileInput" />
+    <button id="uploadButton">Upload</button>
+    <p id="link"></p>
+	    <script>
+        document.getElementById("uploadButton").onclick = async () => {
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+            if (!file) {
+                alert("Please select a file to upload!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const link = `${window.location.origin}/transfer/${data.file_id}/${data.filename}`;
+                document.getElementById("link").textContent = `Share this link: ${link}`;
+            } else {
+                alert("Failed to upload the file!");
+            }
+        };
+    </script>
+</body>
+</html>
