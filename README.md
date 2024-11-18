@@ -50,7 +50,7 @@ Let’s build something amazing together! 💪💥
 ## 🤝 **Collaboration & Donations**:
 I’m open to collaboration on future projects! If you’d like to contribute or have an exciting idea to work on together, feel free to reach out. 🙌
 
-If you enjoy this project and would like to support further development, donations are greatly appreciated! 💰 Your support helps improve the app and fund future features. 💡
+If you enjoy this project and would like to support further development, donations are greatly appreciated! 💰 Your support helps improve the app and fund future features 💡
 
 Thank you for using **pin2pin**—the easiest way to share files! 😎
 
